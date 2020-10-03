@@ -35,14 +35,13 @@ app.get('/ventilatorDetails',middleware.checkToken,function(req,res){
 });
 
 app.post('/searchventilators',middleware.checkToken,function(req,res){
-    console.log("searching ventilator by status")
-    var hId=req.query.hId;
-    var Status=req.query.Status;
-    var query={"hId":hId,"Status":Status};
-    console.log(hId +" " + Status);
+    console.log("searching ventilator by status and hospital name")
+    var Name=req.query.Name;
+    var status=req.query.status;
+    var query={"Name":Name,"status":status};
+    console.log(Name +" " + status);
     db.collection('VentilatorDetails').find(query).toArray().then(result=> res.json(result));
 });
-
 app.post('/searchospitals',middleware.checkToken,function(req,res){
     console.log("searching hospital by name");
     var Name=req.query.Name;
