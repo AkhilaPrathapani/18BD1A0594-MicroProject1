@@ -42,6 +42,7 @@ app.post('/searchventilators',middleware.checkToken,function(req,res){
     console.log(Name +" " + status);
     db.collection('VentilatorDetails').find(query).toArray().then(result=> res.json(result));
 });
+
 app.post('/searchospitals',middleware.checkToken,function(req,res){
     console.log("searching hospital by name");
     var Name=req.query.Name;
@@ -68,10 +69,10 @@ app.post('/addventilators',middleware.checkToken,function(req,res){
     console.log("Adding a ventilator to the ventilatorInfo");
     var hId=req.query.hId;
     var vId=req.query.vId;
-    var Status=req.query.Status;
+    var status=req.query.status;
     var Name=req.query.Name;
-    console.log(hId+" "+vId+" "+Status+" "+Name);
-    var query={"hId":hId,"vId":vId,"Status":Status,"Name":Name};
+    console.log(hId+" "+vId+" "+status+" "+Name);
+    var query={"hId":hId,"vId":vId,"status":status};
     db.collection('VentilatorDetails').insertOne(query,function(err,result){
         if(err) console.log("record not inserted");
         res.json("ventilator added");
